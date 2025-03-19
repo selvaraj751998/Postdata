@@ -1,6 +1,6 @@
 const express = require('express');
 const stud_response = require('./response');
-const basicAuth = require('./Authorization/auth')
+const apikeyAuth = require('./Authorization/apikeyauth');
 const router = express.Router()
 
 router.get('/',(req,res)=>{
@@ -9,7 +9,7 @@ router.get('/',(req,res)=>{
 })
 
 
-router.get('/getalldetails',basicAuth,(req,res)=>{
+router.get('/getalldetails',apikeyAuth,(req,res)=>{
     res.json(stud_response)
 })
 
