@@ -6,12 +6,12 @@ const router = express.Router()
 
 router.get('/',(req,res)=>{
         console.log("First Middleware")
-        res.json(responseHandler.Response(res,stud_response,200));
+        responseHandler.Response(res,stud_response,200);
 })
 
 
 router.get('/getalldetails',apikeyAuth,(req,res)=>{
-    res.json(responseHandler.Response(res,stud_response,200))
+    responseHandler.Response(res,stud_response,200)
 })
 
 
@@ -33,11 +33,15 @@ router.post('/uploadstuddata',(req,res,next)=>{
         "maths" :maths,
         "english" :english
     }
-
+    var checkResult = stud_response.find(x => x.name.toLowerCase()==name.toLowerCase())
+    if(checkResult){
     stud_response.push(new_object)
     console.log(name)
     const result = stud_response.length
-    res.json(stud_response)
+    responseHandler.Response(res,result,200)
+}else{
+    responseHandler.Response(res,null,400)
+}
 })
 
 module.exports = router;
