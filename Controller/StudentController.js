@@ -1,16 +1,17 @@
 const express = require('express');
 const stud_response = require('./response');
 const apikeyAuth = require('./Authorization/apikeyauth');
+const responseHandler = require('./Authorization/ResponseHandler/responseHandler');
 const router = express.Router()
 
 router.get('/',(req,res)=>{
         console.log("First Middleware")
-        res.json(stud_response);
+        res.json(responseHandler.Response(res,stud_response,200));
 })
 
 
 router.get('/getalldetails',apikeyAuth,(req,res)=>{
-    res.json(stud_response)
+    res.json(responseHandler.Response(res,stud_response,200))
 })
 
 
